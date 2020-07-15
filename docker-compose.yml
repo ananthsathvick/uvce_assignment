@@ -1,0 +1,32 @@
+version: '3'
+services: 
+    front-end:
+        build: .
+        ports: 
+            - 8080:80
+        volumes: 
+            - modules:/var/www/html/modules
+            - profiles:/var/www/html/profiles
+            - themes:/var/www/html/themes
+            - sites:/var/www/html/sites
+        networks: 
+            - user_bridge
+    
+    database:
+        image: postgres:10
+        environment:
+            POSTGRES_PASSWORD: example
+        volumes: 
+            - db_data:/var/lib/postgresql/data
+        networks: 
+            - user_bridge
+networks: 
+    user_bridge:
+
+volumes: 
+    modules:
+    profiles:
+    themes:
+    sites:
+    db_data:
+        
