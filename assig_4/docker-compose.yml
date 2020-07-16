@@ -1,0 +1,28 @@
+version: '3'
+services: 
+    front-end:
+        build: .
+        # volumes:
+        #     - web_data:/
+        networks:
+            - ubridge
+        ports: 
+            - 8070:5000
+    sql:
+        image: mysql
+        expose: 
+            - 3306
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_USER: usr
+            MYSQL_PASSWORD: passwd
+            MYSQL_DATABASE: dckr
+        networks: 
+            - ubridge
+        volumes: 
+            - db_data:/var/lib/mysq
+volumes: 
+    web_data:
+    db_data:
+networks: 
+    ubridge:
